@@ -14,7 +14,11 @@ class ApiController extends Controller
     }
 
     public function createWidget(Request $request) {
-
+        if (is_null($request->name)) {
+            return response()->json([
+                "message" => "name is required"
+            ], 400);
+        }
         $widget = new Widget;
 
         $widget->name = $request->name;
